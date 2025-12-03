@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosario - Proyecto Final</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">Proyecto Final</h1>
+            <ul class="nav-menu">
+                <li><a href="biografia.html" class="nav-link">Biografía</a></li>
+                <li><a href="glosario.html" class="nav-link active">Glosario</a></li>
+                <li><a href="crud.html" class="nav-link">CRUD</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="glossary-section">
+            <div class="glossary-header">
+                <h1>Glosario de Términos Web</h1>
+                <p class="subtitle">Definiciones de conceptos clave en desarrollo web</p>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar término..." onkeyup="filterGlossary()">
+            </div>
+
+            <div class="glossary-list" id="glossaryList">
+                <div class="glossary-item" data-term="api">
+                    <h3>API</h3>
+                    <p><strong>Application Programming Interface</strong> - Conjunto de reglas y protocolos que permite que diferentes aplicaciones se comuniquen entre sí.</p>
+                </div>
+
+                <div class="glossary-item" data-term="css">
+                    <h3>CSS</h3>
+                    <p><strong>Cascading Style Sheets</strong> - Lenguaje de hojas de estilo utilizado para describir la presentación de un documento HTML.</p>
+                </div>
+
+                <div class="glossary-item" data-term="crud">
+                    <h3>CRUD</h3>
+                    <p><strong>Create, Read, Update, Delete</strong> - Operaciones básicas de gestión de datos en bases de datos y aplicaciones.</p>
+                </div>
+
+                <div class="glossary-item" data-term="dom">
+                    <h3>DOM</h3>
+                    <p><strong>Document Object Model</strong> - Interfaz de programación para documentos HTML que representa la estructura del documento como un árbol de objetos.</p>
+                </div>
+
+                <div class="glossary-item" data-term="framework">
+                    <h3>Framework</h3>
+                    <p>Estructura de software que proporciona funcionalidades genéricas que pueden ser utilizadas para desarrollar aplicaciones.</p>
+                </div>
+
+                <div class="glossary-item" data-term="html">
+                    <h3>HTML</h3>
+                    <p><strong>HyperText Markup Language</strong> - Lenguaje de marcado estándar para crear páginas web.</p>
+                </div>
+
+                <div class="glossary-item" data-term="javascript">
+                    <h3>JavaScript</h3>
+                    <p>Lenguaje de programación interpretado que permite crear contenido dinámico e interactivo en páginas web.</p>
+                </div>
+
+                <div class="glossary-item" data-term="json">
+                    <h3>JSON</h3>
+                    <p><strong>JavaScript Object Notation</strong> - Formato ligero de intercambio de datos fácil de leer y escribir para humanos y máquinas.</p>
+                </div>
+
+                <div class="glossary-item" data-term="responsive">
+                    <h3>Responsive Design</h3>
+                    <p>Diseño web que se adapta automáticamente a diferentes tamaños de pantalla y dispositivos.</p>
+                </div>
+
+                <div class="glossary-item" data-term="ui">
+                    <h3>UI</h3>
+                    <p><strong>User Interface</strong> - Interfaz de usuario, el espacio donde las personas interactúan con una aplicación.</p>
+                </div>
+
+                <div class="glossary-item" data-term="ux">
+                    <h3>UX</h3>
+                    <p><strong>User Experience</strong> - Experiencia del usuario, cómo se siente una persona al usar un producto o servicio.</p>
+                </div>
+
+                <div class="glossary-item" data-term="variable">
+                    <h3>Variable</h3>
+                    <p>Contenedor con nombre que almacena un valor en programación, permitiendo su reutilización y manipulación.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Proyecto Final. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function filterGlossary() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const items = document.getElementsByClassName('glossary-item');
+
+            for (let i = 0; i < items.length; i++) {
+                const term = items[i].getAttribute('data-term');
+                const text = items[i].textContent || items[i].innerText;
+                
+                if (text.toLowerCase().indexOf(filter) > -1 || term.indexOf(filter) > -1) {
+                    items[i].style.display = '';
+                } else {
+                    items[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

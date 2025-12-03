@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD - Proyecto Final</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">Proyecto Final</h1>
+            <ul class="nav-menu">
+                <li><a href="../biografia/index.html" class="nav-link">Biografía</a></li>
+                <li><a href="../glosario/index.html" class="nav-link">Glosario</a></li>
+                <li><a href="../crud/index.html" class="nav-link active">CRUD</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="crud-section">
+            <div class="crud-header">
+                <h1>Gestión de Estudiantes</h1>
+                <p class="subtitle">Sistema CRUD (Create, Read, Update, Delete)</p>
+            </div>
+
+            <div class="crud-form-container">
+                <h2 id="formTitle">Agregar Nuevo Estudiante</h2>
+                <form id="studentForm" class="crud-form">
+                    <div class="form-group">
+                        <label for="studentName">Nombre:</label>
+                        <input type="text" id="studentName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentEmail">Email:</label>
+                        <input type="email" id="studentEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentAge">Edad:</label>
+                        <input type="number" id="studentAge" min="15" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentCourse">Curso:</label>
+                        <select id="studentCourse" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="Desarrollo Web">Desarrollo Web</option>
+                            <option value="Programación">Programación</option>
+                            <option value="Diseño Gráfico">Diseño Gráfico</option>
+                            <option value="Base de Datos">Base de Datos</option>
+                        </select>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Agregar</button>
+                        <button type="button" class="btn btn-secondary" id="cancelBtn" style="display:none;">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="crud-table-container">
+                <h2>Lista de Estudiantes</h2>
+                <table class="crud-table" id="studentsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Edad</th>
+                            <th>Curso</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTableBody">
+                        <!-- Los datos se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Proyecto Final. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        let students = [];
+        let editingId = null;
+
+        // Cargar estudiantes al iniciar
+        window.onload = function() {
+            loadStudents();
+            displayStudents();
+        };
+
+        // Guardar estudiantes
+        function saveStudents() {
+            const studentsData = JSON.stringify(students);
+            document.cookie = `students=${studentsData}; path=/; max-age=31536000`;
+        }
+
+        // Cargar estudiantes
+        function loadStudents() {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'students') {
+                    try {
+                        students = JSON.parse(decodeURIComponent(value));
+                    } catch (e) {
+                        students = [];
+                    }
+                    return;
+                }
+            }
+            students = [];
+        }
+
+        // Mostrar estudiantes
+        function displayStudents() {
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
+
+            if (students.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No hay estudiantes registrados</td></tr>';
+                return;
+            }
+
+            students.forEach(student => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+                    <td>${student.email}</td>
+                    <td>${student.age}</td>
+                    <td>${student.course}</td>
+                    <td>
+                        <button class="btn-action btn-edit" onclick="editStudent(${student.id})">Editar</button>
+                        <button class="btn-action btn-delete" onclick="deleteStudent(${student.id})">Eliminar</button>
+                    </td>
+                `;
+            });
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('studentForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('studentName').value;
+            const email = document.getElementById('studentEmail').value;
+            const age = parseInt(document.getElementById('studentAge').value);
+            const course = document.getElementById('studentCourse').value;
+
+            if (editingId !== null) {
+                // Actualizar estudiante
+                const index = students.findIndex(s => s.id === editingId);
+                students[index] = { id: editingId, name, email, age, course };
+                editingId = null;
+                document.getElementById('formTitle').textContent = 'Agregar Nuevo Estudiante';
+                document.getElementById('submitBtn').textContent = 'Agregar';
+                document.getElementById('cancelBtn').style.display = 'none';
+            } else {
+                // Crear nuevo estudiante
+                const id = students.length > 0 ? Math.max(...students.map(s => s.id)) + 1 : 1;
+                students.push({ id, name, email, age, course });
+            }
+
+            saveStudents();
+            displayStudents();
+            this.reset();
+        };
+
+        // Editar estudiante
+        function editStudent(id) {
+            const student = students.find(s => s.id === id);
+            if (student) {
+                document.getElementById('studentName').value = student.name;
+                document.getElementById('studentEmail').value = student.email;
+                document.getElementById('studentAge').value = student.age;
+                document.getElementById('studentCourse').value = student.course;
+                
+                editingId = id;
+                document.getElementById('formTitle').textContent = 'Editar Estudiante';
+                document.getElementById('submitBtn').textContent = 'Actualizar';
+                document.getElementById('cancelBtn').style.display = 'inline-block';
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Eliminar estudiante
+        function deleteStudent(id) {
+            if (confirm('¿Estás seguro de eliminar este estudiante?')) {
+                students = students.filter(s => s.id !== id);
+                saveStudents();
+                displayStudents();
+            }
+        }
+
+        // Cancelar edición
+        document.getElementById('cancelBtn').onclick = function() {
+            document.getElementById('studentForm').reset();
+            editingId = null;
+            document.getElementById('formTitle').textContent = 'Agregar Nuevo Estudiante';
+            document.getElementById('submitBtn').textContent = 'Agregar';
+            this.style.display = 'none';
+        };
+    </script>
+</body>
+</html>
