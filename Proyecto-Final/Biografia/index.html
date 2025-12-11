@@ -3,97 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biografía - Proyecto Final</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mi Biografía</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <h1 class="nav-logo">Proyecto Final</h1>
-            <ul class="nav-menu">
-                <li><a href="../biografia/index.html" class="nav-link active">Biografía</a></li>
-                <li><a href="../glosario/index.html" class="nav-link">Glosario</a></li>
-                <li><a href="../crud/index.html" class="nav-link">CRUD</a></li>
-            </ul>
-        </div>
-    </nav>
+    <header>
+        <h1>📝 Mi Biografía</h1>
+        <p>Conoce más sobre mi historia y mis intereses</p>
+        <nav>
+            <a href="../index.html" class="nav-link">← Volver al Inicio</a>
+        </nav>
+    </header>
 
-    <main class="container">
-        <section class="biography-section">
-            <div class="bio-header">
-                <div class="bio-image">
-                    <img src="https://i.ibb.co/sdfyzwCG/your-image.jpg" alt="Foto de perfil">
+    <main>
+        <section>
+            <h2>Sobre Mí</h2>
+            <div class="band-intro">
+                <p><strong>Nombre:</strong> Jose Juan</p>
+                <p><strong>Edad:</strong> 29 </p>
+                <p><strong>Ubicación:</strong> Ensenada, Baja California, México</p>
+                <p><strong>Profesión:</strong> Ingeniero en sistemas computacionales</p>
+                
+                <h3 style="margin-top: 2rem;">Mi Historia</h3>
+                <p class="description">
+                   Soy un estudiante apasionado por la ingeniería en sistemas y la tecnología. 
+                   Desde pequeño me ha intrigado cómo funcionan los programas y las plataformas digitales, 
+                   lo que me motivó a iniciar mi camino en el mundo del desarrollo y los sistemas. 
+                   Actualmente continúo fortaleciendo mis conocimientos para convertirme en un profesional 
+                   capaz de crear soluciones eficientes y modernas. Me gusta aprender constantemente y explorar 
+                   nuevas herramientas que me permitan mejorar mis habilidades día con día.
+                </p>
+                
+                <p class="description">
+                    Mi objetivo es crear experiencias digitales que sean útiles, accesibles y atractivas 
+                    para los usuarios. Creo firmemente en el aprendizaje continuo y en la importancia 
+                    de mantenerse actualizado en un campo tan dinámico como el desarrollo web.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Mis Intereses</h2>
+            <div class="achievements-list">
+                <div class="achievement">
+                    <h3>💻 Programación</h3>
+                    <p>Desarrollo web, algoritmos y nuevas tecnologías</p>
                 </div>
-                <div class="bio-info">
-                    <h1>Jose Juan Padilla Burciaga</h1>
-                    <p class="subtitle">Estudiante de Ingenieria en Sistemas Computacionales</p>
+                <div class="achievement">
+                    <h3>🎵 Música</h3>
+                    <p>Rock alternativo, metal y música electrónica</p>
+                </div>
+                <div class="achievement">
+                    <h3>📚 Aprendizaje</h3>
+                    <p>Cursos online, tutoriales y documentación técnica</p>
+                </div>
+                <div class="achievement">
+                    <h3>🎮 Gaming</h3>
+                    <p>Videojuegos, diseño de juegos y tecnología</p>
                 </div>
             </div>
+        </section>
 
-            <div class="bio-content">
-                <h2>Acerca de Mí</h2>
-                <p>
-                    Soy un estudiante apasionado por el desarrollo web y la tecnología. 
-                    Me interesa crear aplicaciones web modernas y funcionales que resuelvan 
-                    problemas reales. Este proyecto representa mi avance en el aprendizaje 
-                    de HTML, CSS y JavaScript.
-                </p>
-
-                <h2>Educación</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h3>Programacion Web</h3>
-                        <p class="date">2025 - Presente</p>
-                        <p>Curso completo de desarrollo web con enfoque en tecnologías modernas.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>Preparatoria</h3>
-                        <p class="date">2021 - 2025</p>
-                        <p>Educación secundaria con especialización en ciencias.</p>
-                    </div>
+        <section>
+            <h2>Habilidades</h2>
+            <div class="resources-list">
+                <div class="resource-card">
+                    <h3>HTML5</h3>
+                    <p>Estructuración semántica de contenido web</p>
                 </div>
-
-                <h2>Habilidades</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <h3>HTML5</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>CSS3</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>JavaScript</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 75%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Git</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 70%"></div>
-                        </div>
-                    </div>
+                <div class="resource-card">
+                    <h3>CSS3</h3>
+                    <p>Diseño y estilizado de páginas web responsivas</p>
                 </div>
+                <div class="resource-card">
+                    <h3>JavaScript</h3>
+                    <p>Programación e interactividad en el navegador</p>
+                </div>
+                <div class="resource-card">
+                    <h3>Git & GitHub</h3>
+                    <p>Control de versiones y colaboración</p>
+                </div>
+            </div>
+        </section>
 
-                <h2>Intereses</h2>
-                <ul class="interests-list">
-                    <li>Desarrollo de aplicaciones web</li>
-                    <li>Diseño de interfaces de usuario</li>
-                    <li>Programación y resolución de problemas</li>
-                    <li>Aprendizaje continuo de nuevas tecnologías</li>
+        <section>
+            <h2>Objetivos Futuros</h2>
+            <div class="legacy">
+                <ul class="styled-list">
+                    <li>
+                        <strong>🎯 Corto Plazo:</strong> Dominar HTML, CSS y JavaScript
+                    </li>
+                    <li>
+                        <strong>🚀 Mediano Plazo:</strong> Aprender frameworks modernos como React o Vue
+                    </li>
+                    <li>
+                        <strong>💼 Largo Plazo:</strong> Conseguir mi primer trabajo como ingeniero en sistemas
+                    </li>
+                    <li>
+                        <strong>🌟 Aspiración:</strong> Contribuir a proyectos open source y crear mis propias aplicaciones
+                    </li>
                 </ul>
             </div>
         </section>
+
+        <div class="back-button">
+            <a href="../index.html" class="btn">← Regresar a la Página Principal</a>
+        </div>
     </main>
 
-    <footer class="footer">
-        <p>&copy; 2025 Proyecto Final. Todos los derechos reservados.</p>
+    <footer>
+        <p>&copy; 2025 Mi Proyecto Web. Biografía personal.</p>
     </footer>
 </body>
 </html>

@@ -3,207 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD - Proyecto Final</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Sistema CRUD - Gestión de Tareas</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <h1 class="nav-logo">Proyecto Final</h1>
-            <ul class="nav-menu">
-                <li><a href="../biografia/index.html" class="nav-link">Biografía</a></li>
-                <li><a href="../glosario/index.html" class="nav-link">Glosario</a></li>
-                <li><a href="../crud/index.html" class="nav-link active">CRUD</a></li>
+    <header>
+        <h1>📊 Sistema CRUD</h1>
+        <p>Gestión de tareas con operaciones completas</p>
+        <nav>
+            <a href="../index.html" class="nav-link">← Volver al Inicio</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>¿Qué es CRUD?</h2>
+            <p>
+                <strong>CRUD</strong> es un acrónimo que representa las cuatro operaciones básicas 
+                de la gestión de datos:
+            </p>
+            <ul class="styled-list">
+                <li><strong>C</strong>reate (Crear) - Agregar nuevos registros</li>
+                <li><strong>R</strong>ead (Leer) - Visualizar registros existentes</li>
+                <li><strong>U</strong>pdate (Actualizar) - Modificar registros existentes</li>
+                <li><strong>D</strong>elete (Eliminar) - Borrar registros</li>
             </ul>
-        </div>
-    </nav>
+        </section>
 
-    <main class="container">
-        <section class="crud-section">
-            <div class="crud-header">
-                <h1>Gestión de Estudiantes</h1>
-                <p class="subtitle">Sistema CRUD (Create, Read, Update, Delete)</p>
-            </div>
-
-            <div class="crud-form-container">
-                <h2 id="formTitle">Agregar Nuevo Estudiante</h2>
-                <form id="studentForm" class="crud-form">
-                    <div class="form-group">
-                        <label for="studentName">Nombre:</label>
-                        <input type="text" id="studentName" required>
+        <section class="tools-section">
+            <h2>Gestor de Tareas</h2>
+            
+            <div style="background-color: var(--bg-color); padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                <h3>➕ Crear Nueva Tarea</h3>
+                <form id="taskForm" style="display: grid; gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <label for="taskTitle" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Título:</label>
+                        <input 
+                            type="text" 
+                            id="taskTitle" 
+                            placeholder="Nombre de la tarea" 
+                            required
+                            style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 5px; font-size: 1rem;"
+                        >
                     </div>
-                    <div class="form-group">
-                        <label for="studentEmail">Email:</label>
-                        <input type="email" id="studentEmail" required>
+                    <div>
+                        <label for="taskDesc" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Descripción:</label>
+                        <textarea 
+                            id="taskDesc" 
+                            rows="3" 
+                            placeholder="Describe la tarea"
+                            style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 5px; font-size: 1rem; resize: vertical;"
+                        ></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="studentAge">Edad:</label>
-                        <input type="number" id="studentAge" min="15" max="100" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="studentCourse">Curso:</label>
-                        <select id="studentCourse" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="Desarrollo Web">Desarrollo Web</option>
-                            <option value="Programación">Programación</option>
-                            <option value="Diseño Gráfico">Diseño Gráfico</option>
-                            <option value="Base de Datos">Base de Datos</option>
+                    <div>
+                        <label for="taskPriority" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Prioridad:</label>
+                        <select 
+                            id="taskPriority"
+                            style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 5px; font-size: 1rem;"
+                        >
+                            <option value="baja">Baja</option>
+                            <option value="media" selected>Media</option>
+                            <option value="alta">Alta</option>
                         </select>
                     </div>
-                    <div class="form-buttons">
-                        <button type="submit" class="btn btn-primary" id="submitBtn">Agregar</button>
-                        <button type="button" class="btn btn-secondary" id="cancelBtn" style="display:none;">Cancelar</button>
-                    </div>
+                    <button type="submit" class="btn">Agregar Tarea</button>
                 </form>
             </div>
 
-            <div class="crud-table-container">
-                <h2>Lista de Estudiantes</h2>
-                <table class="crud-table" id="studentsTable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Edad</th>
-                            <th>Curso</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="studentsTableBody">
-                        <!-- Los datos se cargarán aquí dinámicamente -->
-                    </tbody>
-                </table>
+            <div id="tasksList">
+                <h3>📋 Lista de Tareas</h3>
+                <div id="tasksContainer" style="margin-top: 1rem;">
+                    <!-- Las tareas se mostrarán aquí dinámicamente -->
+                    <div style="text-align: center; padding: 2rem; color: var(--text-light);">
+                        <p>No hay tareas registradas. ¡Crea tu primera tarea!</p>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <section class="tools-section">
+            <h2>Operaciones CRUD Explicadas</h2>
+            <div class="resources-list">
+                <div class="resource-card">
+                    <h3>CREATE (Crear)</h3>
+                    <p>
+                        Utiliza el formulario superior para crear nuevas tareas. Completa el título, 
+                        descripción y prioridad, luego presiona "Agregar Tarea".
+                    </p>
+                </div>
+                <div class="resource-card">
+                    <h3>READ (Leer)</h3>
+                    <p>
+                        Todas las tareas creadas se visualizan automáticamente en la lista de tareas. 
+                        Puedes ver todos los detalles de cada tarea.
+                    </p>
+                </div>
+                <div class="resource-card">
+                    <h3>UPDATE (Actualizar)</h3>
+                    <p>
+                        Haz clic en el botón "Editar" de cualquier tarea para modificar su información. 
+                        Los cambios se guardan inmediatamente.
+                    </p>
+                </div>
+                <div class="resource-card">
+                    <h3>DELETE (Eliminar)</h3>
+                    <p>
+                        Usa el botón "Eliminar" en cualquier tarea para borrarla permanentemente 
+                        de la lista.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="back-button">
+            <a href="../index.html" class="btn">← Regresar a la Página Principal</a>
+        </div>
     </main>
 
-    <footer class="footer">
-        <p>&copy; 2024 Proyecto Final. Todos los derechos reservados.</p>
+    <footer>
+        <p>&copy; 2025 Mi Proyecto Web. Sistema CRUD de gestión de tareas.</p>
     </footer>
 
     <script>
-        let students = [];
+        // Array para almacenar las tareas
+        let tasks = [];
         let editingId = null;
 
-        // Cargar estudiantes al iniciar
-        window.onload = function() {
-            loadStudents();
-            displayStudents();
-        };
+        // Referencias a elementos del DOM
+        const form = document.getElementById('taskForm');
+        const tasksContainer = document.getElementById('tasksContainer');
+        const titleInput = document.getElementById('taskTitle');
+        const descInput = document.getElementById('taskDesc');
+        const priorityInput = document.getElementById('taskPriority');
 
-        // Guardar estudiantes
-        function saveStudents() {
-            const studentsData = JSON.stringify(students);
-            document.cookie = `students=${studentsData}; path=/; max-age=31536000`;
+        // Función para generar un ID único
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
         }
 
-        // Cargar estudiantes
-        function loadStudents() {
-            const cookies = document.cookie.split(';');
-            for (let cookie of cookies) {
-                const [name, value] = cookie.trim().split('=');
-                if (name === 'students') {
-                    try {
-                        students = JSON.parse(decodeURIComponent(value));
-                    } catch (e) {
-                        students = [];
-                    }
-                    return;
-                }
+        // CREATE - Agregar tarea
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (editingId) {
+                // UPDATE - Actualizar tarea existente
+                updateTask(editingId);
+            } else {
+                // CREATE - Crear nueva tarea
+                const newTask = {
+                    id: generateId(),
+                    title: titleInput.value,
+                    description: descInput.value,
+                    priority: priorityInput.value,
+                    completed: false,
+                    createdAt: new Date().toLocaleString()
+                };
+                
+                tasks.push(newTask);
             }
-            students = [];
-        }
+            
+            // Limpiar formulario
+            form.reset();
+            editingId = null;
+            renderTasks();
+        });
 
-        // Mostrar estudiantes
-        function displayStudents() {
-            const tbody = document.getElementById('studentsTableBody');
-            tbody.innerHTML = '';
-
-            if (students.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No hay estudiantes registrados</td></tr>';
+        // READ - Renderizar tareas
+        function renderTasks() {
+            if (tasks.length === 0) {
+                tasksContainer.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: var(--text-light);">
+                        <p>No hay tareas registradas. ¡Crea tu primera tarea!</p>
+                    </div>
+                `;
                 return;
             }
 
-            students.forEach(student => {
-                const row = tbody.insertRow();
-                row.innerHTML = `
-                    <td>${student.id}</td>
-                    <td>${student.name}</td>
-                    <td>${student.email}</td>
-                    <td>${student.age}</td>
-                    <td>${student.course}</td>
-                    <td>
-                        <button class="btn-action btn-edit" onclick="editStudent(${student.id})">Editar</button>
-                        <button class="btn-action btn-delete" onclick="deleteStudent(${student.id})">Eliminar</button>
-                    </td>
-                `;
-            });
+            tasksContainer.innerHTML = tasks.map(task => `
+                <div class="resource-card" style="border-left: 4px solid ${getPriorityColor(task.priority)};">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="margin: 0; ${task.completed ? 'text-decoration: line-through; opacity: 0.6;' : ''}">${task.title}</h3>
+                        <span style="background-color: ${getPriorityColor(task.priority)}; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">
+                            ${task.priority.toUpperCase()}
+                        </span>
+                    </div>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;">${task.description || 'Sin descripción'}</p>
+                    <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 1rem;">
+                        📅 Creada: ${task.createdAt}
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button class="btn-small btn-complete" data-id="${task.id}" style="background-color: ${task.completed ? 'var(--warning-color)' : 'var(--success-color)'};">
+                            ${task.completed ? '↺ Reabrir' : '✓ Completar'}
+                        </button>
+                        <button class="btn-small btn-edit" data-id="${task.id}">✎ Editar</button>
+                        <button class="btn-small btn-delete" data-id="${task.id}" style="background-color: var(--accent-color);">🗑 Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        // Manejar envío del formulario
-        document.getElementById('studentForm').onsubmit = function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('studentName').value;
-            const email = document.getElementById('studentEmail').value;
-            const age = parseInt(document.getElementById('studentAge').value);
-            const course = document.getElementById('studentCourse').value;
+        // Función auxiliar para obtener el color según la prioridad
+        function getPriorityColor(priority) {
+            const colors = {
+                'baja': '#27ae60',
+                'media': '#f39c12',
+                'alta': '#e74c3c'
+            };
+            return colors[priority] || '#95a5a6';
+        }
 
-            if (editingId !== null) {
-                // Actualizar estudiante
-                const index = students.findIndex(s => s.id === editingId);
-                students[index] = { id: editingId, name, email, age, course };
-                editingId = null;
-                document.getElementById('formTitle').textContent = 'Agregar Nuevo Estudiante';
-                document.getElementById('submitBtn').textContent = 'Agregar';
-                document.getElementById('cancelBtn').style.display = 'none';
-            } else {
-                // Crear nuevo estudiante
-                const id = students.length > 0 ? Math.max(...students.map(s => s.id)) + 1 : 1;
-                students.push({ id, name, email, age, course });
-            }
-
-            saveStudents();
-            displayStudents();
-            this.reset();
-        };
-
-        // Editar estudiante
-        function editStudent(id) {
-            const student = students.find(s => s.id === id);
-            if (student) {
-                document.getElementById('studentName').value = student.name;
-                document.getElementById('studentEmail').value = student.email;
-                document.getElementById('studentAge').value = student.age;
-                document.getElementById('studentCourse').value = student.course;
-                
+        // UPDATE - Editar tarea
+        function editTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                titleInput.value = task.title;
+                descInput.value = task.description;
+                priorityInput.value = task.priority;
                 editingId = id;
-                document.getElementById('formTitle').textContent = 'Editar Estudiante';
-                document.getElementById('submitBtn').textContent = 'Actualizar';
-                document.getElementById('cancelBtn').style.display = 'inline-block';
                 
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Scroll al formulario
+                form.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        // Eliminar estudiante
-        function deleteStudent(id) {
-            if (confirm('¿Estás seguro de eliminar este estudiante?')) {
-                students = students.filter(s => s.id !== id);
-                saveStudents();
-                displayStudents();
+        function updateTask(id) {
+            const taskIndex = tasks.findIndex(t => t.id === id);
+            if (taskIndex !== -1) {
+                tasks[taskIndex] = {
+                    ...tasks[taskIndex],
+                    title: titleInput.value,
+                    description: descInput.value,
+                    priority: priorityInput.value
+                };
             }
         }
 
-        // Cancelar edición
-        document.getElementById('cancelBtn').onclick = function() {
-            document.getElementById('studentForm').reset();
-            editingId = null;
-            document.getElementById('formTitle').textContent = 'Agregar Nuevo Estudiante';
-            document.getElementById('submitBtn').textContent = 'Agregar';
-            this.style.display = 'none';
-        };
+        // Completar/Reabrir tarea
+        function toggleComplete(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                renderTasks();
+            }
+        }
+
+        // DELETE - Eliminar tarea
+        function deleteTask(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar esta tarea?')) {
+                tasks = tasks.filter(t => t.id !== id);
+                renderTasks();
+            }
+        }
+
+        // Event delegation for task buttons
+        tasksContainer.addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn-complete')) {
+                toggleComplete(e.target.dataset.id);
+            } else if (e.target.classList.contains('btn-edit')) {
+                editTask(e.target.dataset.id);
+            } else if (e.target.classList.contains('btn-delete')) {
+                deleteTask(e.target.dataset.id);
+            }
+        });
+
+        // Renderizar tareas iniciales
+        renderTasks();
     </script>
 </body>
 </html>
